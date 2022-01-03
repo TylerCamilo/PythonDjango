@@ -1,0 +1,20 @@
+CURSO DE DJANGO CON PYTHON
+
+SESION 7
+1. instalacion de python (descargarlo de org)
+2. instalacion de Django PIP herramienta para crear entornos
+3. Creacio de entorno prueba con el comando #python -m venv nombreentorno
+4. Activar el entorno de desarrollo
+	a. entrando a la carpeta scripts de la anterior instalacion
+		ejecutamos el archivo activate. 
+		Simplemente desde el cmd 
+5. Descargar el Django con pip #pip install django
+	Siempre con el entorno activado
+	Y para cualquier isntalacion de paquete es #pip install nombre
+6. Verificacion de paquetes
+	con el entorno activo y estando en la carpeta general 
+	digitamos #pip freeze --local Este nos desplega lo que 
+	tenemos instalado en nuestro proyecto.
+	
+SESION 8 CREAR PROYECTO  WEB CON DJANGO
+
