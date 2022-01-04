@@ -1,5 +1,9 @@
 """
 """
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1056dcc3099e20ec4193f51cc11da96d381b2f4e
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,6 +15,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u5h4i@k8zl$24!dhx)=22c)ue@5y%$pg)hpr&@#*wt6rcjx0)f'
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1056dcc3099e20ec4193f51cc11da96d381b2f4e
 
 # Application definition
 
