@@ -52,9 +52,26 @@ CLASE 10 ARCHIVOS DE UN PROYECTO Django
 	
 
 SESION 11 ARCHIVO URL.py DE DJANGO
+	Cuando ingresamos una urlk en el navegador el proyecto busca en urls la referencia que se busca
+	una evz encontrado ejectura lo siguiente despues de la coma segun se le haya indicado hacer 
+	en esa url.
+	
+	Se realiza prueba que hacemos para url, agregando una. prueba satisfactoria. Queda Ok
+	PARA TENER EN CUENTA:
+		- EN LAS URL SON MUICHAS YA QUE CADA VENTANA GENERA CADA VENTANA
+		  ES MEJOR QUE EL ARCHIVO PRINCIPAL
 
+SESION 12 CONFIGURACION/ORGANIZACION DE ARCHIVO SETTING.py
 
-
+	- Es un archivo que va creciendo a medida que se va desarrollando. 
+	- Cada entorno de prueba/testing/ususario/ entorno local etc el archivo va cambiando
+		Entonces se debe configurar el archivo para evitar la reconfiguracion de este archivo en 
+		los distintos entornos de trabajo. 
+		
+		a. Creamos una carpeta a nivel del archivo setting.py
+		b. Creamos 3 archivos base.py / local.py / prod.py
+		c. RECORDAR INCLUIR __init__py, le decimos django que ahi dentro de la carpeta
+		hay codigo que debe tener en cuenta
 
 
 

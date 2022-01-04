@@ -17,4 +17,48 @@ SESION 7
 	tenemos instalado en nuestro proyecto.
 	
 SESION 8 CREAR PROYECTO  WEB CON DJANGO
+1. RECORDAR SIEMPRE ACTIVAR EL ENTORNO DE DESARROLLO
+2. para crear un proyecto es:
+	Esrtando en la carpeta donde queremos alojar el proyecto 
+	digitamos en consola #django-admin startproject nombreproyecto.
+3. Verficar si está bien creado el proyecto. Es decir vamos a ver si
+	subio en linea el proyecto, estando en la carpeta del proyecto
+	digitamos en consola: #python manage.py runserver
+	Esto sube el servidor en un servidor local copia la direccion en el 
+	navegador y lo revisas
+
+SESION 9 CREACION DEL PRIMER PROYECTO EMPLEADOS
+
+1 Creamos de la misma manera anterior.
+	a. crear un entorno virtual llamado empleados
+		#python -m venv empleados
+	b. instalamos django
+		#pip install django
+	c. crear el proyecto 
+		#django-admin startproject empleado
+	d. editor de texto VScode
+	
+CLASE 10 ARCHIVOS DE UN PROYECTO Django
+	
+	RECORDAR ACTIVAR EL ENTORNO DEL PROYECTO
+	
+	a) manage.py = es el principal del proyecto django se encarga de llamar todo lo que 
+	se haya implementado en el proyecto. 
+	b) settings.py = dentro de todo el se configura todo lo que se necesite para correr
+	c) urls.py = llamado al codigo del codigo escrito, porque un priyecto django funciona con
+		url
+	d) db.sqllite.py = por defecto para las bases de datos cuando no se ha configurado ninguna
+	e) _init_.py = hace que se lea todo el codigo de python
+	
+
+SESION 11 ARCHIVO URL.py DE DJANGO
+
+
+
+
+
+
+
+
+
 
