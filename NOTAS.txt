@@ -75,10 +75,140 @@ SESION 13 CONFIGURACION/ORGANIZACION DE ARCHIVO SETTING.py
 		c. RECORDAR INCLUIR __init__py, le decimos django que ahi dentro de la carpeta
 		hay codigo que debe tener en cuenta
 		c. Local: ayduara a usar el proyecto en local.
-python manage.py runserver --settings=empleado.settings.local
+		python manage.py runserver --settings=empleado.settings.local
+
+SESION 14 QUE SON APLICACIONES EN DJANGO
+
+	desarrollo agil SCRUM,KANBAM,XP
+	EN pocas lineas de codigo se obtiene un codigo funcional 
+	EN DJANGO SOLCAMENTE PARA CUBRIR UNA NECESIDAD ES DECIR PARA 
+	DESPUES INTEGRAR LAS DIFERENTES SOLUCIONES.
+	
+	VAMOS HACER EL REGISTRO DE EMPLEADOS DE UNA EMPRESA
+	ADMINISTRACION DE EMPLEADOS A NIVEL GENERAL.
+	
+	HACERLO:
+	1. SE DEFINE EL DISEÑO (FUNCIONALIDAD) DE BOTONES PESTAÑAS ETC
+	2. CREACION DE LA BASE DE DATOS NECESARIA, PARA ESTE CASO SOLO 
+		NECESITAMOS DOS TABLAS ASI:
+		-	DEPARATAMENTO
+			name
+			shor_name
+		- 	EMPLEADOS
+			first_name
+			last_name
+			job
+			departamento (relacion)
+			-image
+	2. Determinar las app de Django 
+		- una app para departamento
+		- una app para Empleados
+
+SESION 15 CREACION DE UNA APP 
+	 
+	 TENER ACTIVO EL ENTORNO (SIEMPRE)
+	 
+	 1. Crear iuna carpeta llamada aplications a nivel de manage.py
+	 2. Estando en aplications ejecutamos el comando django-admin startapp nombreapp
+	 3. Creamos dos app departamento y personas
+	 
+	 Se crean dos carpetas diferentes con archivos cada unoa tiene un archivo llamado
+	 migration y ahi es donde se va a guardar los cambios que vaya teniendo nuestra app.
+	 
+	 
+	 ACTUALIZACION !!! al agregar aplicaciones en un proyecto Django.
+	 
+IMPORTANTE!!!!
+Hola, antes de pasar a la siguiente clase por favor ten en cuenta esta pequeña actualización.
+
+Desde la versión 3.2 de Django cambiaron algunas cosas respecto a las aplicaciones y en especifico respecto 
+al archivo apps.py que se genera al crear una aplicación. 
+
+Sin no toman en cuenta lo que mencionaré más adelante tendrán problemas al agregar una aplicación local 
+al proyecto.
+
+Desde el minuto 1.20 de la siguiente clase, mostramos como agregamos una app local a un proyecto, luego de 
+que agreguen la ruta de su aplicación a la variable que contiene aplicaciones de django INSTALLED_APPS = [] 
+También debemos hacer un paso más.
+
+Nos dirigimos a la aplicación creada y vamos al archivo apps.py dentro encontraremos un código como este:
+
+from django.apps import AppConfig
+  
+class DepartamentoConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'departamento'
+
+aquí, en la variable name, debemos cambiar por la ruta de nuestra aplicación, 
+para el ejemplo quedaría de esta forma:
+
+class DepartamentoConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'applications.departamento'
 
 
+Este proceso hay que hacerlo para todas las apps que agreguemos a partir de ahora.
+ Con ello ya no tendrán problemas al agregar una app.
+ 
+ DECLARAR URLS CON RE_PATH
+Como ultimo cambio, también si revisamos el minuto 9:30 de la siguiente clase, 
+usamos una función llamada re_path para declarar urls dentro de urls, pero esto ya 
+no es necesario desde la versión 3.2, puedes solamente usar la función path, que es 
+la que trae ya django por defecto.
 
+SESION 17 INSTALAR UNA APP EN DJANGO
 
+	DEBEMOS DECIRLE A DJANGO QUE TENGA EN CUENTA LAS DOS APP INCIADAS
+	cada uno de nuestras carpetas tendra nuestra carpeta url para que nquede mas 
+	ordenadas que le correspondan.
+	
+	entonces en urls.py de departamento agregamos 
+	
+	from django.contrib import admin
+from django.urls import path
 
+def DesdeApp(self):
+    print('===================estamos probando URLS.py desde la app deparatamento')
 
+urlpatterns = [
+    path('departamento/', DesdeApp),
+]
+
+	Y LE HACEMOS REFERENCIA DESDE URLS.PY que es el principal 
+	 de la siguiente manera.
+	 
+	 urlpatterns = [
+    path('admin/', admin.site.urls),
+    #incluimos url de app departamento
+    path ('',include ('aplications.departamento.urls')),
+]
+	Corremos el navegador y verfiucamos que haya ejecutado lka funcion.
+	}
+	
+SESION 18. PATRO DE DISEÑO, VISTAS TEMPLATE
+
+	POR QUE LAS APP TRAE LA ESTRUCTURA QUE TRAE? DJANGO EN WEB
+		
+	PATRONES DE DISEÑO: Son estandares para que el codigo esté mas ordenado y abierto a mejorar
+	TIPOS DE PROGRAMACION:
+	-Programacion en capa:
+		base de datos, logica de negocio, presentacion
+	-En la web se llama modelo vista controlador (MVC)
+		MODELOO ES BASE DE DATOS
+		VISTA ES PANTALLA INTERFAZ
+		CONTROLADOR ES LA LOGICA DEL NEGOCIO
+		
+	EN DJANGO ES:
+	MDT MODELO VISTA TEMPLATE
+	MODELO ES BD
+	VISTA ES LOGICA NEGOCIO Y PREPARACION DE DATOS
+	TEMPLATE ES EL QUE MUESTRE EN PANTALLA. ESCRIBIENDO SOLO HTML
+
+SESION 19 VISTAS BASADAS EN CLASES
+	
+	TRABAJAMOS EN MVT
+	1. CON EL ENTORNO ACTIVADO 
+	2. CREAR UNA NUEVA APP LLAMADA home
+		recordemos estando en la carpeta aplications con el comando
+		#django-admin startapp home
+		qeudamos en el 3:29
