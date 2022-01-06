@@ -24,8 +24,8 @@ def PruebaUrl(self):
 urlpatterns = [
     path('admin/', admin.site.urls),
     #incluimos url de app departamento
-    path ('',include ('aplications.departamento.urls')),
-    path ('',include ('aplications.persona.urls')),
-    path ('',include ('aplications.home.urls')),
+    path ('',include ('applications.departamento.urls')),
+    path ('',include ('applications.persona.urls')),
+    path ('',include ('applications.home.urls')),
 ]
 
