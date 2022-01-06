@@ -26,4 +26,6 @@ urlpatterns = [
     #incluimos url de app departamento
     path ('',include ('aplications.departamento.urls')),
     path ('',include ('aplications.persona.urls')),
+    path ('',include ('aplications.home.urls')),
 ]
+
