@@ -1,6 +1,26 @@
+#from django.forms.models import _Fields
 from django.shortcuts import render
 #
-from django.views.generic import TemplateView
+from django.views.generic import (TemplateView,
+ListView, CreateView)
+from .models import Prueba
 
 class PruebaView(TemplateView):
-    template_name = 'prueba.html' 
+    template_name = 'home/prueba.html' 
+
+
+class PruebaListView(ListView):
+    template_name = "home/lista.html"
+    context_object_name = 'listanumeros'
+    queryset = ['1','2','3','4', '5', '6'] ##PERMITE VER
+
+
+class ListarPrueba(ListView):
+    template_name = "home/lista_prueba.html"
+    model = Prueba
+    context_object_name= "lista"
+
+class PruebaCreateView(CreateView):
+    template_name = "home/add.html"
+    model = Prueba
+    fields = ['titulo','subtitulo', 'cantidad']
