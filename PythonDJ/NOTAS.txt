@@ -399,5 +399,8 @@ Ques lo que nos retorna ListView, LISTANDONOS todo lo que tenga el modelo prueba
 createVew tambein hicimos una practica y como mostar los datos en html para formulario
 usando html. ver commit llamado clase 25 actualizado y funcional
 
+<<<<<<< HEAD
 
 PRUEBA DE MODIFICACION DE UN COMMIT ERRONEO 
+=======
+>>>>>>> af083f3b0a40fa1d8f660ba3225f0b7a1686912b
