@@ -388,3 +388,16 @@ python manage.py migrate.
 
 Creamos un usuario administrador con : python magane.py createsuperusuario y llenamos
 los datos solicitados
+
+SESION 25 VISTAS GENERICAS Y CONCEPTOS BASICOS
+
+COMO SE INTERACTUAN LAS VISTAS GENERICAS CON NUESTRA BASE DE DATOS
+
+LOQ UE SE HARA ES QUE LOQ UE AGREGAMOS EN EL ADMIN DE DJANGO LO AGREGUE A LA BD 
+cada vez que salga QuerySet es porqie es una consulta a BD 
+Ques lo que nos retorna ListView, LISTANDONOS todo lo que tenga el modelo prueba
+createVew tambein hicimos una practica y como mostar los datos en html para formulario
+usando html. ver commit llamado clase 25 actualizado y funcional
+
+
+PRUEBA DE MODIFICACION DE UN COMMIT ERRONEO 

@@ -336,3 +336,55 @@ MEDIA_ROOT = BASE_DIR / 'media' # carpeta base media
 
 
 ###CLASE 23 CONOCIENDO MAS SOBRE LAS VISTAS GENERICAS
+
+USAMOS LISTVIEW PARA PROCESOS DE LISTADO
+RECOMENDADA PARA ESO REGISTRO DE BD
+
+####CLASE 24 MODELS PARA VISTAS EN DJANGO
+
+VIMOS COMO TRABJAAN VISTAS GENERICAS DE DJANGO
+ES DECIR EN EL TEMPLATE
+
+MODELS.PY nos hace referencia a las BD
+No se usa codigo sql ni nada parecido
+
+DJANGO USA ORM usa una capa revio a sql 
+es decir escribimos codigo en python sera transformado por medio de la ORM 
+a codigo SQL. 
+
+toda interaccion con BD sera escrita en la parte de models.py 
+con las dos tablas del ejemplo.
+
+Ahora en models.py de home que es donde estamos trabajando el ejemplo 
+aregamos una clase que llamaermos prueba, asi:
+
+class Prueba(models.Model):
+    titulo = models.CharField(max_length = 100)
+    subtitulo = models.CharField(max_length=50)
+    cantidad = models.IntegerField()
+
+    def __str__(Self):
+        return self.titulo
+		
+se pone una funcion que retorna algo una de las variables generalmente.
+
+con lo anterior se creo una tabla BD de la app home
+
+para que se ejecute :
+
+1. en la terminal entorno activo: python manage.py makemigrations --->verifique lo 
+nuevo de mi modelos de la app
+
+para que realice la operacion de creacion de la BD en nuestro modelo ejecutamos
+python manage.py migrate.
+
+Como ver si tengo realmente creada la BD?
+Necesitamos registros
+
+necesitamos el administrads de DJANGO
+
+En este caso en el archivo admin.py registraremos la BD creada de la siguiente manera:
+python manage.py migrate.
+
+Creamos un usuario administrador con : python magane.py createsuperusuario y llenamos
+los datos solicitados
