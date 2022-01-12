@@ -389,7 +389,7 @@ python manage.py migrate.
 Creamos un usuario administrador con : python magane.py createsuperusuario y llenamos
 los datos solicitados
 
-SESION 25 VISTAS GENERICAS Y CONCEPTOS BASICOS
+#####SESION 25 VISTAS GENERICAS Y CONCEPTOS BASICOS
 
 COMO SE INTERACTUAN LAS VISTAS GENERICAS CON NUESTRA BASE DE DATOS
 
@@ -398,4 +398,47 @@ cada vez que salga QuerySet es porqie es una consulta a BD
 Ques lo que nos retorna ListView, LISTANDONOS todo lo que tenga el modelo prueba
 createVew tambein hicimos una practica y como mostar los datos en html para formulario
 usando html. ver commit llamado clase 25 actualizado y funcional
+
+<<<<<<< HEAD
+
+PRUEBA DE MODIFICACION DE UN COMMIT ERRONEO 
+=======
+>>>>>>> af083f3b0a40fa1d8f660ba3225f0b7a1686912b
+
+
+##### SESION 26 MODELOS EN DJANGO
+
+CONEXION DE DJANGO A CONEXION A BASE DE DATOS.
+CON EJEMPLO SIMPLE 
+MODELO ES REPRESENTACION DE UNA TABLA DE DATOS.
+
+TIPOS DE CAMPO
+CAMPOS OBLIGATORIOS
+MODELOS RELACIONADOS
+INSTALACION DE POSTGRES
+CONEXION A POSTGRES PORQUE ES LA RECOMENDACION DE DJANGO
+Y TAMBIEN COMENTAMOS ACERCA DE MySQL
+
+##### SESION 27TIPOS DE CAMPOS DE UN MODELO DE DJANGO
+
+emepzamos por la bd de Departamento
+
+departamento / models
+
+se creó 
+class Departamento(models.model):
+    name = models.CharField('Nombre', max_length = 50)
+    short_name = models.CharField('Nombre Corto', max_length = 20)
+    anulate = models.BooleanField('Anulado', default = False)
+    
+
+
+    def __str__(self):
+        return self.id + '-' + self.short_name
+
+####SESION 28 PARAMETROS EN LOS CAMPOS DE UN MODELO
+
+VERIFICACION DE MODELO CORRECTO
+
+
 
