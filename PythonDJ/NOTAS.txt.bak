@@ -439,6 +439,23 @@ class Departamento(models.model):
 ####SESION 28 PARAMETROS EN LOS CAMPOS DE UN MODELO
 
 VERIFICACION DE MODELO CORRECTO
+PREPARO PARA MIGRACION CON EL CODIGO
+
+python manage.py makemigrations
 
 
+en la carpeta migratios es donde va registrando los cambios que se han realizado
+por ejemplo en la anterior comando se creó el modelo Departamento
 
+COMO CMD no arrojó ningun error ahora si lo podemois enviar directamente a la BD real
+con el comando #python manage.py migrate.
+
+CAMPO OBLIGATORIO
+name = models.CharField('Nombre', max_length = 50)
+
+CAMPO NO OBLIGATORIO
+name = models.CharField('Nombre', max_length = 50, blank=true)
+													null=true
+PARA QUE NO SE REPITA 
+													unique=true //irrepetible el parametro
+													editable=false//Nadie lo puede editar

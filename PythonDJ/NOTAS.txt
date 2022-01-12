@@ -459,3 +459,30 @@ name = models.CharField('Nombre', max_length = 50, blank=true)
 PARA QUE NO SE REPITA 
 													unique=true //irrepetible el parametro
 													editable=false//Nadie lo puede editar
+
+####SESION 29 MODELOS RELACIONADOS FOREINGKEY
+Como la tabla empleados trae relacianada la tabla departamento
+se debe relacionar 
+
+En personas se importa:
+
+from applications.departamento.models import Departamento
+
+Se escribe l foreingKey
+
+departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+
+repetimos el paso de 
+
+PREPARAR MIGRACION Y VERIFICAR CON:
+		# python manage.py makemigrations
+		
+	si no aparece ningun error entonces
+
+ENVIAMOS MIGRACION 
+		# python manage.py migrate
+		
+Levantamos el servidor y vemos como va el desarrollo
+
+#####SESION 3. INSTALACION DE POSTGRESQL EN W10, CREACION DE BD
+
