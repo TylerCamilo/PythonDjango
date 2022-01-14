@@ -484,5 +484,102 @@ ENVIAMOS MIGRACION
 		
 Levantamos el servidor y vemos como va el desarrollo
 
-#####SESION 3. INSTALACION DE POSTGRESQL EN W10, CREACION DE BD
+#####SESION 30 INSTALACION DE POSTGRESQL EN W10, CREACION DE BD
+
+instalamos directo de la poagina de postgresql 
+inciamos la shell de postgress directamente de la carpeta de instalacion
+nos pedirá una serie de datos server, database, port, username, y password. 
+Solo escribimos el pass escrito en la instalacion de postgress
+creamos una bd desde la misma consola de postgress SQL
+# create database nombre;
+# create data base dbempleado;
+CREAMOS EL USUARIO
+# create user nombre;
+# create user camilo
+CREAMOS PERMISO PARA CAMILO
+- ACCEDEMOS A LA BD CREADA
+# \c dbempleado;
+DAMOS PERMISO
+# ALTER ROLE usuario WITH PASSWORD 'contraseña de usuario';
+# ALTER ROLE camilo WITH PASSWORD 'camilocurso';
+
+
+#### SESION 31 CONEXION DJANGO CON POSTGRESS
+
+POSTGRES SQL      // ORM  // DJANGO
+ 
+INSTALAT COMPLEMENTOS PARA QUE EL ORM COMPRENDA TODAS LAS 
+INSTRUCCIONES DADAS DESDE PYTHON. 
+PARA POSTGRESS ES Psycopg2
+
+TENIENDO EN ENTORNO ACTIVO, Y EN LA CMD DIGITAMOS
+ # pip install psycopg2
+
+AHORA SE DEBE CONFIGRUAR LA BASE DE DATOS DENTRO DEL PROYECTO
+LO HAREMOS EN EL ARCHIVO LOCAL.PY DE LA CARPETA SETTINGS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'empleado',
+        'USER': 'camilo',
+        'PASSWORD': 'camilocurso',
+        'PORT': '5432',
+    }
+}
+
+CREAMOS LA NUEVA BASE DE DATOS CREADA EN PSOTGRESS
+RECORDEMOS:
+
+# python manage.py makemigrations// preparamos y evrificacion  para migracion
+# python manage.py migrate    /// enviamos la migracion
+
+COMO SE CAMBIA DE BASE DE DATOS, ES NECESARIO CREAR OTRO SUPER USUARIO
+
+#python manage.py createsuperuser
+digitamos los datos:
+user Camilo
+Passm Camilo123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

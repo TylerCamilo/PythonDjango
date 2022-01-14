@@ -459,3 +459,116 @@ name = models.CharField('Nombre', max_length = 50, blank=true)
 PARA QUE NO SE REPITA 
 													unique=true //irrepetible el parametro
 													editable=false//Nadie lo puede editar
+
+####SESION 29 MODELOS RELACIONADOS FOREINGKEY
+Como la tabla empleados trae relacianada la tabla departamento
+se debe relacionar 
+
+En personas se importa:
+
+from applications.departamento.models import Departamento
+
+Se escribe l foreingKey
+
+departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+
+repetimos el paso de 
+
+PREPARAR MIGRACION Y VERIFICAR CON:
+		# python manage.py makemigrations
+		
+	si no aparece ningun error entonces
+
+ENVIAMOS MIGRACION 
+		# python manage.py migrate
+		
+Levantamos el servidor y vemos como va el desarrollo
+
+#####SESION 30 INSTALACION DE POSTGRESQL EN W10, CREACION DE BD
+
+instalamos directo de la poagina de postgresql 
+inciamos la shell de postgress directamente de la carpeta de instalacion
+nos pedirá una serie de datos server, database, port, username, y password. 
+Solo escribimos el pass escrito en la instalacion de postgress
+creamos una bd desde la misma consola de postgress SQL
+# create database nombre;
+# create data base dbempleado;
+CREAMOS EL USUARIO
+# create user nombre;
+# create user camilo
+CREAMOS PERMISO PARA CAMILO
+- ACCEDEMOS A LA BD CREADA
+# \c dbempleado;
+DAMOS PERMISO
+# ALTER ROLE usuario WITH PASSWORD 'contraseña de usuario';
+# ALTER ROLE camilo WITH PASSWORD 'camilocurso';
+
+
+#### SESION 31 CONEXION DJANGO CON POSTGRESS
+
+POSTGRES SQL      // ORM  // DJANGO
+ 
+INSTALAT COMPLEMENTOS PARA QUE EL ORM COMPRENDA TODAS LAS 
+INSTRUCCIONES DADAS DESDE PYTHON. 
+PARA POSTGRESS ES Psycopg2
+
+TENIENDO EN ENTORNO ACTIVO, Y EN LA CMD DIGITAMOS
+ # pip install psycopg2
+
+AHORA SE DEBE CONFIGRUAR LA BASE DE DATOS DENTRO DEL PROYECTO
+LO HAREMOS EN EL ARCHIVO LOCAL.PY DE LA CARPETA SETTINGS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'empleado',
+        'USER': 'camilo',
+        'PASSWORD': 'camilocurso',
+        'PORT': '5432',
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

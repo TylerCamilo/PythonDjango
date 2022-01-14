@@ -11,5 +11,5 @@ class Prueba(models.Model):
     subtitulo = models.CharField(max_length=50)
     cantidad = models.IntegerField()
 
-    def __string__(Self):
-        return Self.titulo + Self.subtitulo
+def __string__(Self):
+    return Self.titulo + Self.subtitulo
