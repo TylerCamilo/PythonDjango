@@ -528,12 +528,36 @@ DATABASES = {
     }
 }
 
+CREAMOS LA NUEVA BASE DE DATOS CREADA EN PSOTGRESS
+RECORDEMOS:
 
+# python manage.py makemigrations// preparamos y evrificacion  para migracion
+# python manage.py migrate    /// enviamos la migracion
 
+COMO SE CAMBIA DE BASE DE DATOS, ES NECESARIO CREAR OTRO SUPER USUARIO
 
+#python manage.py createsuperuser
+digitamos los datos:
+user Camilo
+Passm Camilo123
 
+### SESION 32 ADMINISTRADOR DE DJANGO
+### SESION 33 CLASS META, MODELOS Y EN EL ADMIN DE DJANGO
 
+se realiza edicion y ordenamiento del listar los objetos de departamenot en el 
+archivo models
 
+class Meta:
+    verbose_name = 'Mi departamento'
+    verbose_name_plural = 'Areas de la empresa'
+    ordering =['name'] #ordenar
+    unique_together = ('name', 'shortname')
+	
+Se debe implementar tambien en persona
+
+from applications.departamento.models import Departamento
+
+###SESION 34 FILTROS EN EL ADMIN DE DJANGO
 
 
 

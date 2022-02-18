@@ -541,10 +541,23 @@ digitamos los datos:
 user Camilo
 Passm Camilo123
 
+### SESION 32 ADMINISTRADOR DE DJANGO
+### SESION 33 CLASS META, MODELOS Y EN EL ADMIN DE DJANGO
 
+se realiza edicion y ordenamiento del listar los objetos de departamenot en el 
+archivo models
 
+class Meta:
+    verbose_name = 'Mi departamento'
+    verbose_name_plural = 'Areas de la empresa'
+    ordering =['name'] #ordenar
+    unique_together = ('name', 'shortname')
+	
+Se debe implementar tambien en persona
 
+from applications.departamento.models import Departamento
 
+###SESION 34 PERSONALZIAR TABLAS EN EL ADMIN DJANGO
 
 
 
