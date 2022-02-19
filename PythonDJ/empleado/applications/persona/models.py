@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.fields import CharField
 from applications.departamento.models import Departamento
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Habilidades(models.Model):
@@ -29,7 +30,7 @@ class Empleado(models.Model):
      departamento = models.ForeignKey(Departamento, on_delete = models.CASCADE)
      avatar = models.ImageField (upload_to = 'empleado', blank = True, null = True)
      habilidades = models.ManyToManyField(Habilidades) 
-     
+     hoja_vida = RichTextField()
      class Meta:
         verbose_name = 'Mi Empleado'
         verbose_name_plural = 'Empleados de la empresa'

@@ -17,6 +17,7 @@ SESION 7
 	tenemos instalado en nuestro proyecto.
 	
 SESION 8 CREAR PROYECTO  WEB CON DJANGO
+
 1. RECORDAR SIEMPRE ACTIVAR EL ENTORNO DE DESARROLLO
 2. para crear un proyecto es:
 	Esrtando en la carpeta donde queremos alojar el proyecto 
@@ -52,7 +53,7 @@ CLASE 10 ARCHIVOS DE UN PROYECTO Django
 	
 
 SESION 11 ARCHIVO URL.py DE DJANGO
-	Cuando ingresamos una urlk en el navegador el proyecto busca en urls la referencia que se busca
+	Cuando ingresamos una url en el navegador el proyecto busca en urls la referencia que se busca
 	una evz encontrado ejectura lo siguiente despues de la coma segun se le haya indicado hacer 
 	en esa url.
 	
@@ -154,6 +155,7 @@ Este proceso hay que hacerlo para todas las apps que agreguemos a partir de ahor
  Con ello ya no tendrán problemas al agregar una app.
  
  DECLARAR URLS CON RE_PATH
+ 
 Como ultimo cambio, también si revisamos el minuto 9:30 de la siguiente clase, 
 usamos una función llamada re_path para declarar urls dentro de urls, pero esto ya 
 no es necesario desde la versión 3.2, puedes solamente usar la función path, que es 
@@ -168,7 +170,7 @@ SESION 17 INSTALAR UNA APP EN DJANGO
 	entonces en urls.py de departamento agregamos 
 	
 	from django.contrib import admin
-from django.urls import path
+	from django.urls import path
 
 def DesdeApp(self):
     print('===================estamos probando URLS.py desde la app deparatamento')
@@ -180,15 +182,15 @@ urlpatterns = [
 	Y LE HACEMOS REFERENCIA DESDE URLS.PY que es el principal 
 	 de la siguiente manera.
 	 
-	 urlpatterns = [
+	urlpatterns = [
     path('admin/', admin.site.urls),
     #incluimos url de app departamento
     path ('',include ('aplications.departamento.urls')),
 ]
-	Corremos el navegador y verfiucamos que haya ejecutado lka funcion.
+	Corremos el navegador y verfiucamos que haya ejecutado la funcion.
 	}
 	
-SESION 18. PATRO DE DISEÑO, VISTAS TEMPLATE
+SESION 18. PATRON DE DISEÑO, VISTAS TEMPLATE
 
 	POR QUE LAS APP TRAE LA ESTRUCTURA QUE TRAE? DJANGO EN WEB
 		
@@ -356,7 +358,7 @@ toda interaccion con BD sera escrita en la parte de models.py
 con las dos tablas del ejemplo.
 
 Ahora en models.py de home que es donde estamos trabajando el ejemplo 
-aregamos una clase que llamaermos prueba, asi:
+agregamos una clase que llamaermos prueba, asi:
 
 class Prueba(models.Model):
     titulo = models.CharField(max_length = 100)
@@ -419,7 +421,7 @@ INSTALACION DE POSTGRES
 CONEXION A POSTGRES PORQUE ES LA RECOMENDACION DE DJANGO
 Y TAMBIEN COMENTAMOS ACERCA DE MySQL
 
-##### SESION 27TIPOS DE CAMPOS DE UN MODELO DE DJANGO
+##### SESION 27  TIPOS DE CAMPOS DE UN MODELO DE DJANGO
 
 emepzamos por la bd de Departamento
 
@@ -461,6 +463,7 @@ PARA QUE NO SE REPITA
 													editable=false//Nadie lo puede editar
 
 ####SESION 29 MODELOS RELACIONADOS FOREINGKEY
+
 Como la tabla empleados trae relacianada la tabla departamento
 se debe relacionar 
 
@@ -557,14 +560,71 @@ Se debe implementar tambien en persona
 
 from applications.departamento.models import Departamento
 
-###SESION 34 FILTROS EN EL ADMIN DE DJANGO
+###SESION 34 PERSONALZIAR TABLAS EN EL ADMIN DJANGO
+
+en persona creamos la siguiente tabla
+
+# Create your models here.
+class Habilidades(models.Model):
+      habilidad = models.CharField('Habilidad', max_length = 50)
+
+      class Meta:
+         verbose_name = 'Habilidad'
+         verbose_name_plural = 'Habilidades empleados'
+
+      def __str__(self):
+        return str(self.id) + ' - ' + self.habilidad
+
+Se debe relacionar las habilidades a las personas
+
+en la class Empleado agregamos:
+habilidades = models.ManyToManyField(Habilidades) 
+
+$ pytno manage.py makemigratios
+si no muestra errores
+
+$ python manage.py migrate
+
+#MOSTRANDO EL COLUMNAS LOS DATOS REGISTRADOS  en el archivo admin.py en el modelo persona
+
+class EmpleadoAdmin(admin.ModelAdmin): #heredando funciones
+    list_display = (
+        'first_name',
+        'last_name',
+        'departamento',
+        'job',
+    )
+admin.site.register(Empleado, EmpleadoAdmin)
+
+###CLASE 35 FILTROS EN EL ADMINISTRADOR DE DJANGO
+
+Inmtegrar un buscador
+
+class EmpleadoAdmin(admin.ModelAdmin): #heredando funciones
+    list_display = (
+        'first_name',
+        'last_name',
+        'departamento',
+        'job',
+    )
+    search_fields = ('first_name' ,) ###por nombre
+    
+admin.site.register(Empleado, EmpleadoAdmin)
 
 
+Ahora si queremos agregar un filtrador por si deseamos ver filtro por departamento agregamos
+list_filter = ('job',)
+
+ 
+En las habilidades vamos a generar un filtro para ser mas rapidos en la lista desplegable de habilidalaes
+En el archivo admin.py de la clase persona
+
+filter_horizontal = ('habiliadaes') #hara que funcione solo para habilidades
 
 
-
-
-
+tambien agregamos un list_filter a habilidades, se hace simplemente agregando
+al list_filter ya creado para job, se agrega el nombre de habilidades
+SOLO FUNCIONA CON RELACIOONES O CAMPOS MUCHOS A MUCHOS
 
 
 
