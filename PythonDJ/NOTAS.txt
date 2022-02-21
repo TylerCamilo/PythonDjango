@@ -679,12 +679,74 @@ En models.py
 Se agrega para el uso de la herramienta de edicion ckeditor
 en la clase empleado(models.Model)
 
+############### 8. VITAS BASADAS EN CLASES
+
+### CLASE 38
+VISTAS GENERICAS EN DJANGO
+
+Nos hacen la solicitud de los siguientes requierimientos en el proyecto
+1- lista todos los empleados de la empresa
+2- Lista a los empleados por area
+3- Lista empleados por trbajo
+4- Lista empleados por palabra clave
+5- Listar habilidades de los empleados
+
+En view. py de persona :
+
+$ 
+from pyexpat import model
+from django.shortcuts import render
+from django.views.generic import (ListView)
+
+#models
+from .models import Empleado
+
+class ListAllEmpleados(ListView):
+    template_name = 'persona/list_all.html'
+    model = Empleado
 
 
+ya que toda vista basada en clase con lo anterir ya podemos visualizar,
+ahora necesitamos hacer el llamado desde url.py de persona agregando lo sifuiente: agregando
+el nombre en esa primer comilla seria algo asi como
+en la ruta llamada 'lsitar todo empleados muestreme lo que haya en view de listar
+todos los empleados como un tema view.
+
+from django.contrib import admin
+from django.urls import path
+
+from . import views
+urlpatterns = [
+    path('listar-todo-empleados', views.ListAllEmpleados.as_view())
+]
 
 
+Tambein debemos agregarlas en las urls principales de DJANGO que estan detro de empleado.urls.py 
+agregando:
 
+$ path ('',include ('applications.persona.urls')),
 
+AHORA, como estamos haciendo un llamado a un archivo .html llamado list_all.html, 
+debemos crearlo en la direccion de indicamos en la ruta en la creacion de la clase lisView 
+'persona/list_all.html
+
+vamos a la carpeta templates y ahi debe haber una carpeta llamada persona que contenga un archivo
+llamado list_all.html, le escribimos algun contenido con las eqtiquetas de HTML
+
+En la clase agregamos 
+
+$ context_object_name = 'lista'
+
+Y en el HTML 
+
+$ *****{{lista}}
+
+TAMbien hay otra forma de acceder y es quitando lo agregado a la clase creada
+y agregado en el html 
+
+{{object_list}}
+para acceder al listado de empleados
+corremos el programa e ingresamos 
 
 
 

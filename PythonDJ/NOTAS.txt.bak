@@ -627,17 +627,95 @@ al list_filter ya creado para job, se agrega el nombre de habilidades
 SOLO FUNCIONA CON RELACIOONES O CAMPOS MUCHOS A MUCHOS
 
 
+###CLASE 36 FUNCIONES ESPECIALES EN EL ADMIN
+
+Cuando nace la necesidad de vincular una columna que no tiene que ver con el modelo 
+es decir una integracion de dos comlumnas para este caso practico.,
+Se procede de la siguiente manera
+
+En la clase empleadoAdmin agregamos la columna 'full_name'
+Queriendo que me concatene el nombre completo
+
+quedando el codigo asi:
+
+#Decorador para que muestre los datos en columnas
+class EmpleadoAdmin(admin.ModelAdmin): #heredando funciones
+    list_display = (
+        'first_name',
+        'last_name',
+        'departamento',
+        'job',
+        'full_name', 
+    )
+    #funcion de full_name
+    
+    def full_name(self,obj):
+        #la funcion que se neceite
+        print(obj.first_name)
+        return obj.first_name + ' ' + obj.last_name
+    
+    search_fields = ('first_name' ,)
+    list_filter = ('job', 'habilidades',)
+    #
+    filter_horizontal = ('habilidades',)
+    
+    
+admin.site.register(Empleado, EmpleadoAdmin)
+
+ 
+#### CLASE 37 Apps de terceros -  Admin de Django
+
+uso de Django CKEditor para el admin
+
+$ pip install django-ckeditor
+
+Se agrega a base.py
+
+INSTALLED_APPS
+'ckeditor'
+
+En models.py 
+
+Se agrega para el uso de la herramienta de edicion ckeditor
+en la clase empleado(models.Model)
+
+############### 8. VITAS BASADAS EN CLASES
+
+### CLASE 38
+VISTAS GENERICAS EN DJANGO
+
+Nos hacen la solicitud de los siguientes requierimientos en el proyecto
+1- lista todos los empleados de la empresa
+2- Lista a los empleados por area
+3- Lista empleados por trbajo
+4- Lista empleados por palabra clave
+5- Listar habilidades de los empleados
+
+En view. py de persona :
+
+$ 
+from pyexpat import model
+from django.shortcuts import render
+from django.views.generic import (ListView)
+
+#models
+from .models import Empleado
+
+class ListAllEmpleados(ListView):
+    template_name = 'persona/list_all.html'
+    model = Empleado
 
 
+ya que toda vista basa en clase con lo anterir ya podemos visualizar,
+ahora necesitamos hacer el llamado desde url.py de persona agregando lo sifuiente:
 
+from django.contrib import admin
+from django.urls import path
 
-
-
-
-
-
-
-
+from . import views
+urlpatterns = [
+    path('listar-todo-empleados', views.ListAllEmpleados.as_view())
+]
 
 
 
