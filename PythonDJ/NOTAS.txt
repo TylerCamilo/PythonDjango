@@ -733,31 +733,118 @@ debemos crearlo en la direccion de indicamos en la ruta en la creacion de la cla
 vamos a la carpeta templates y ahi debe haber una carpeta llamada persona que contenga un archivo
 llamado list_all.html, le escribimos algun contenido con las eqtiquetas de HTML
 
-En la clase agregamos 
+En la clase de vies.py de personas agregamos 
 
 $ context_object_name = 'lista'
 
-Y en el HTML 
+Y en el HTML llamado list_all.html
 
 $ *****{{lista}}
 
-TAMbien hay otra forma de acceder y es quitando lo agregado a la clase creada
+TAMbien hay otra forma de acceder y es quitando lo agregado a la clase
 y agregado en el html 
 
 {{object_list}}
 para acceder al listado de empleados
-corremos el programa e ingresamos 
+corremos el programa e ingresamos FUNCIONA!!!!!
+
+### CLASE 39 FILTROS EN EL LIST VIEW  
+
+Se realiza un filtro para lograr el item 1 de listar empleados.
+
+Se crea una clase en view.py 
+
+class ListByAreaEmpleados(ListView): #lista empleados de un area
+    template_name = 'persona/list_by_area.html'
+    queryset = Empleado.objects.filter(
+        departamento__name = 'Contabilidad'
+    )
+template o tema es donde agregamos la lectrua del html del objeto
+queryset es el requerimiento, donde le decimos del modelo empleado
+traigame los elementos que tengan en el objeto departamento en el atribut
+name los valores 'contabilidad'
+
+EN LAS URLS agregamos el llamado a esa list_view
+
+$ 
+from . import views
+urlpatterns = [
+    path('listar-todo-empleados', views.ListAllEmpleados.as_view()),
+    path('listar-by-area', views.ListByAreaEmpleados.as_view()), #agregado el filtro
+]
+$
+
+Tambien como apuntamos a un arechivo html llamado list_by_Area
+lo creamos llamando al contenido de la lista, usando el siguiente codigo
+
+<h1>Lista empleados por departament</h1>
+
+<ul>
+    {% for element in object_list %}
+    <li>{{ element }}</li>
+    {% endfor %}
+</ul>
+
+ &&&&&&&&&&&&&&&&& AVISO LA ANTEIOR NO ES LA MEJOR FORMA DE HACERLA
+ 
+ ###CLASE 40 PARAMETROS POR URL Y FRILTROS EN LIST
 
 
+Este tipo de filtros lo hace cuando en la URL se le inmgresa el parametros
+en view.py de persona:
+
+Modificamos la clase creando una funcion get_queryset que es unb metodo que devuleve una lista
+lo codificamos de la siguiente manera
+
+class ListByAreaEmpleados(ListView): #lista empleados de un area
+    template_name = 'persona/list_by_area.html'
+    
+    def get_queryset(self):
+        
+        area =  self.kwargs['shorname']
+        lista = Empleado.objects.filter(
+            departamento__name = area
+        )
+        return lista
+		
+Creando una nueva variable llamada area 
+
+en url.py de persona 
+en el path ya agregado vamos a modificarlo de la siguiente manera 
+
+$ path('listar-by-area/<shorname>/', views.ListByAreaEmpleados.as_view()),
+
+entre los simbolos de <> escribimos el nombre que le daremos al parametro
+que se escribe en shorname, que es el mismo que escucha la variable area 
+de la clase creada en view dentro de la misma funcion. Hacinedo el filtro de la
+misma manera. 
+
+##### CLASE 42 PETICIONES GET EN DESARROLLO WEB
+
+USANOD CAJA DE TEXTO HTML PARA REALIZAR EL FILTRO
+
+se debe entender un concepto fundamental
+protocolo HTTP
+
+comunicacion de dos computadores haciendo peticiones por meteodoos ahttp
+get, post, put... etc
 
 
+Peticion  de meetodo get se hace de usuario a servidor
+Es decir responde el servidor con la informacion de la poeticion get
+
+interceptaremos la peticion del usuario es decir en la caja de texto
+y que la reciba el servidor en una peticion get y el servidore responda
+con la informacion filtrada.
+
+Para interceptar metododo get es necesario usar HTML, y dentor de html sera 
+necesario usa el bloque form donde se indica las cajas de texto donde se envia
+la informacion a traves del metodo get a nuestro servidor. 
+
+Se hace de la siguiente manera para satisfacer el requerimento 4. listar empleados por palabra clave.
 
 
-
-
-
-
-
+AVISO PENDIENTE REVISAR LA CLASE 43 codigo adelantadao pero no muestra el listadof filtrado en consola
 
 
 

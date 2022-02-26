@@ -23,7 +23,7 @@ class EmpleadoAdmin(admin.ModelAdmin): #heredando funciones
         return obj.first_name + ' ' + obj.last_name
     
     search_fields = ('first_name' ,)
-    list_filter = ('job', 'habilidades',)
+    list_filter = ('job',"departamento", 'habilidades',)
     #
     filter_horizontal = ('habilidades',)
     
