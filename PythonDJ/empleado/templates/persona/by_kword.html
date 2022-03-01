@@ -3,3 +3,10 @@
     <input type="text" id="kword" name = "kword" placeholder= "ingrese palabra aquí">
     <button type = "submit"> Buscar </button>
 </form>
+<h3>Lista resultados</h3>
+<ul>
+    {% for element in empleados %}
+        <li>{{element}}</li>
+    {% endfor %}
+
+</ul>

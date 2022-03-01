@@ -841,6 +841,11 @@ Para interceptar metododo get es necesario usar HTML, y dentor de html sera
 necesario usa el bloque form donde se indica las cajas de texto donde se envia
 la informacion a traves del metodo get a nuestro servidor. 
 
+Se hace de la siguiente manera para satisfacer el requerimento 4. listar empleados por palabra clave.
+
+
+AVISO PENDIENTE REVISAR LA CLASE 43 codigo adelantadao pero no muestra el listadof filtrado en consola
+
 
 
 
