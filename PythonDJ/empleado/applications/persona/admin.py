@@ -9,11 +9,13 @@ admin.site.register(Habilidades)
 #Decorador para que muestre los datos en columnas
 class EmpleadoAdmin(admin.ModelAdmin): #heredando funciones
     list_display = (
+        'id',
         'first_name',
         'last_name',
         'departamento',
         'job',
-        'full_name', 
+        'full_name',
+         
     )
     #funcion de full_name
     

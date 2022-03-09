@@ -7,7 +7,10 @@ from .models import Empleado
 
 class ListAllEmpleados(ListView):
     template_name = 'persona/list_all.html'
+    paginate_by = 5
+    ordering = 'first_name'
     model = Empleado
+    
     
 class ListByAreaEmpleados(ListView): #lista empleados de un area
     template_name = 'persona/list_by_area.html'
@@ -33,6 +36,12 @@ class ListEmpleadosByKword(ListView):
         ) 
         print('lista restultado: ', lista)
         return lista
+    
+class ListHabilidadesEmpleado(ListView):
+    template_name = 'persona/habilidades.html'
+    context_object_name = 'habilidades'
+    
+    
     
     #context_object_name = 'lista'
 # Create your views here.

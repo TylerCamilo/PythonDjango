@@ -892,3 +892,54 @@ Creamos un class llamado ListEmpleadosByKword donde heradosmo de lIstView
     {% endfor %}
 
 </ul>
+
+### CLASE 44 PAGINACION EN UN LSITVIEW
+	Listar todos los empleados, no es bueno cargar muchos registros.
+	
+	vamos a paginar y carga de resultados de acuerdo un filtro para cargar x cantidad
+	de resultados por pagina, lo que vamos hacer el lop siguiente 
+	agregango en la clase ListAllEmpleados la linea $ paginate_by =5
+	quedando el codigo asi:
+	
+	$ 	class ListAllEmpleados(ListView):
+		template_name = 'persona/list_all.html'
+		paginate_by = 5
+		ordering = 'first_name'
+		model = Empleado
+		
+	paginando cada 5 empleados registrados en la url listar-todo-empleados
+	y con el ordering lo organizamos por el primer nombre
+	
+	
+#### CLASE 45 LIST VIEW CON RELACION MANYTOMANY
+
+	creacion de listar habilidades del empleado
+	
+	en views.py
+	
+	class ListHabilidadesEmpleado(ListView):
+		template_name = 'persona/habilidades.html'
+		context_object_name = 'habilidades'
+		
+	la relacion de habilidades a persona es muchos a muchos. Vamos a la documentacion de 
+	como acceder a los datos con esa relacion. SE USA EL METODO ALL, TENIENDO EN CUENTA
+	QUE SOLO NECESITAMOS UN REGITRO DE EMPLEADO Y NO DE VARIOS.
+		
+	digitamos el query set donde se listara la lista que obtendremos como resultado.
+	
+	def get_queryset(self):
+        empleado = Empleado.objects.get(id = 8)#Me recupera un unico registro refernte a al ID
+        print(empleado.habilidades.all())
+        return empleado.habilidades.all()
+		
+	agregamos el listado en url para visualizar
+	
+	path('lista-habilidades-empleado', views.ListHabilidadesEmpleado.as_view()),
+	
+	y agregamos el archivo donde estamos generado la vista, para el caso en
+	'persona/list_all.html'
+
+#### CLASE 46 Vista generica Detail view
+
+Trabajaremos en un detailview, por ejemplo sirve para ver mas detalles acerca de un 
+registro de uno de los id, nombres etc. Vamos al codigo

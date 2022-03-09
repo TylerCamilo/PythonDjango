@@ -843,9 +843,52 @@ la informacion a traves del metodo get a nuestro servidor.
 
 Se hace de la siguiente manera para satisfacer el requerimento 4. listar empleados por palabra clave.
 
+#### CLASE 43 Filtro atraves de una caja de texto
 
-AVISO PENDIENTE REVISAR LA CLASE 43 codigo adelantadao pero no muestra el listadof filtrado en consola
+Creamos un class llamado ListEmpleadosByKword donde heradosmo de lIstView
+	
+	class ListEmpleadosByKword(ListView):
+    #Lista de empleado por palabra clave
+    template_name = 'persona/by_kword.html' #Cxreamos el template a usar
+    context_object_name = 'empleados' #redefinir el nombre con el que se accede a la lista resultado que retorna
+	
+	declaramos una nueva URL en url empleado:
+	
+	path('buscar-empleado', views.ListEmpleadosByKword.as_view()),
+	
+	CREAMOS EL TEMPLATE
+	
+	CON EL NOMBRE QUE LE INDICAMOS EN EL TEMPLATE_NAME
 
+	Dentro de ese archivo, la caja debe estar form
+	 de la siguiente manera:
+	 
+	 $<h1>Buscar empleado por palabra clave</h1>
+	<form method="GET"> {% csrf_token %}
+		<input type="text" id="kword" name = "kword" placeholder= "ingrese palabra aquí">
+		<button type = "submit"> Buscar </button>
+	</form>
+	- {% csrf_token %} para que django de acceso a la consulta del GET.
+	
+	en view.py 
 
+	HACEMOS LA SOLICITUD para rescartar lo obtenido de GET, de la siguiente manera:
+	
+	$ def get_queryset(self):
+        print('Aqui es ****')
+        palabra_clave = self.request.GET.get("kword", '')
+        lista = Empleado.objects.filter(
+            first_name = palabra_clave
+        ) 
+        print('lista restultado: ', lista) 
+        return lista
+	
+	Ahora en el html hacemos el codigo de impresion
+	
+	$<h3>Lista resultados</h3>
+<ul>
+    {% for element in empleados %}
+        <li>{{element}}</li>
+    {% endfor %}
 
-
+</ul>
