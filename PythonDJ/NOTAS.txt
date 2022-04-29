@@ -943,3 +943,185 @@ Creamos un class llamado ListEmpleadosByKword donde heradosmo de lIstView
 
 Trabajaremos en un detailview, por ejemplo sirve para ver mas detalles acerca de un 
 registro de uno de los id, nombres etc. Vamos al codigo
+
+en app/persona/ view.py
+
+creamos una clase ya que estamos en vistas basadas en clase
+
+agregamos la importancion en view.py
+
+from django.views.generic import (ListView, DetailView)
+
+y agregagamos la clase 
+
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    template_name = "persona/detail_empleado.html"
+
+estas vistas seimplre trabaja con modelos ais que recibe un modelo de parametros
+tambien agregamos un teplate,
+
+agregamos la url en el archivo url.py
+
+path('ver-empleado/<pk>/', views.EmpleadoDetailView.as_view()),
+
+porque un pk? recibe un parametro por url, entonces internamente django crea un registro
+llamado pk haciendo referencia a un id que internamente se crea en un modelo en django creando
+un registro para cada id de nuestra base de datos y ese registro se accede de similar manera.
+
+Editamos el template que agregamos a los templates de persona llamado detail_empleado.html
+
+<h1> DETALLE DE UN EMPLEADO </h1>
+{{ empleado }} tambien  {{ object }}
+
+<h3>Los datos del empleado son</h3>
+<p>{{empleado.first_name}}</p>
+<p>{{empleado.last_name}}</p>
+<p>{{empleado.departamento}}</p>
+<p>{{empleado.habilidades}}</p>
+
+### CLASE 47 mas dfetalles
+
+ver en detalle de un registro, algo muy sueprficial que entrará en mas detalles en clases futuras
+
+###	CLASE 48 CreateView
+
+	Vista basada en clase, vistas genericas mas usadas durante el desarrollo de un proyecto
+	vista para generar registro en base de datos.
+	
+	Recordar que si queremos usar una vista generica primero debemos importarla
+	
+	$$from django.views.generic import (ListView, DetailView, createView)
+	
+	creamos la clase y tambien agregamos a url.py
+	
+	class EmpleadoCreateView(CreateView):
+    model = Empleado
+    template_name = "persona/add.html"
+
+
+	$     path('add-empleado/', views.EmpleadoCreateView.as_view()),
+
+###	CLASE 49 FIELDS en la CreateView
+
+	Fields es referdio a los campos del modelo
+ 
+	es decir que parametros queremos ingresar
+	fields = ['first_name', 'last_name'] # crean cajas en el view 
+	
+	pero para que el me importe todo al html de manera ordenada vertical agregamos 
+	el FIELD de la siguiente manera! 
+	
+	$ 	class EmpleadoCreateView(CreateView):
+		model = Empleado
+		template_name = "persona/add.html"
+		fields = ('__all__')
+		
+	Y en el HTML
+	
+	$ 
+		<h1>Creacion de persona </h1>
+		{{ form.as_p }}
+		
+	Tambien agregar al urls
+	path('add-empleado/', views.EmpleadoCreateView.as_view()),
+	
+### CLASE 50 Metodo post en el CreateView
+
+	usando el metodo post enviamos informacion al servidor 
+	
+	creamos en view.py 
+	
+	class EmpleadoCreateView(CreateView):
+    model = Empleado
+    template_name = "persona/add.html"
+    fields = ('__all__') # para que muestre todos los campos que queremos llenar 
+    success_url = '.' # la pagina a donde queremos que redireccione despues de dar agregar
+	
+	en add.html 
+	
+	<h1>Creacion de empleado </h1>
+
+	<form method = "POST"> {% csrf_token %} #llave de seguridad para que acceda al metodo post
+		{{ form.as_p }}
+		<button type = "submit"> Agregar </button>
+	</form>
+	
+### CLASE 51, Redireccionamiento dentro de una createView-url name
+
+	La mejor manera es usar el modulo reverse_lazy, ya que este tiene varios metodos que nos pueden
+	ayduar a la gestion de las URL y ademas tiene metodos que se pueden usar y nos ayudan a la usabilidad
+	de nuestra aplciacion en Django. Se implementa de la siguiente manera:
+	
+	
+	from django.urls import reverse_lazy
+	
+	class EmpleadoCreateView(CreateView):
+		model = Empleado
+		template_name = "persona/add.html"
+		fields = ('__all__')
+		success_url = reverse_lazy('persona_app:correcto')
+		
+### CLASE 52 FORM VALID EN CREATEVIRE
+
+	CREAMOS UNA NEUVA NECESIDAD EN NUESTRO PROYECTO
+	
+	SURGE LA NECESIDAD DE QUE TENGAMOS CONCATENADOS EL NOMBRE Y APELLIDO EN UNA VARIABLE 
+	LLAMADA FULL NAME. COMO LO HAREMOS.
+	
+	CREAMOS EL MODELO en models.py 
+	
+	full_name = models.CharField("Nombre completo", max_length=120, blank=True)
+	
+	el blank=true nos idica que no es obligatorio.
+	
+	Detenemos el servicio 
+	y hacemos las migraciones 
+	
+	python manage.py makemigrations
+	
+	python manage.py makemigrate
+	
+	hecha la migracion 
+	
+	Ahora haremos que el programa de manera interna genere el full name de manera
+	independiente para no hacer que el usuario registre dos veces los datos solicitados
+	
+	si cargamos la url de add-empleado nos agrega el espacio, lo haremos para que no agregue ese espacio.
+	modificamos el view asi:
+	
+	class EmpleadoCreateView(CreateView):
+		model = Empleado
+		template_name = "persona/add.html"
+		fields = [
+			'first_name',
+			'last_name',
+			'job',
+			'departamento',
+			'habilidades',
+		]
+		success_url = reverse_lazy('persona_app:correcto')
+		
+	
+	Ahora como lo que queremos es que cuando inrgese los datos el mismo programa agrega el full name
+	solito usando el metodo form_valid que nos inrgesda cuando los datos registrado son correctos.
+	
+	dentro de la misma clase creada se agrega:
+	
+	class EmpleadoCreateView(CreateView):
+		model = Empleado
+		template_name = "persona/add.html"
+		fields = [
+        'first_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+		]
+		success_url = reverse_lazy('persona_app:correcto')
+    
+		def form_valid(self,form): #el atributo form es el que se esta almacenando
+			#logica del proceso
+			
+			
+			return super(EmpleadoCreateView,self).form_valid(form)

@@ -1,6 +1,9 @@
+from dataclasses import field
 from pyexpat import model
 from django.shortcuts import render
-from django.views.generic import (ListView)
+from django.views.generic import (ListView, DetailView,CreateView, 
+                                  TemplateView)
+from django.urls import reverse_lazy
 
 #models
 from .models import Empleado
@@ -41,8 +44,34 @@ class ListHabilidadesEmpleado(ListView):
     template_name = 'persona/habilidades.html'
     context_object_name = 'habilidades'
     
+
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    template_name = "persona/detail_empleado.html"
+    
+class SuccessView(TemplateView):
+    template_name = "persona/success.html"
+
+
+    
+class EmpleadoCreateView(CreateView):
+    model = Empleado
+    template_name = "persona/add.html"
+    fields = [
+        'first_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+    ]
+    success_url = reverse_lazy('persona_app:correcto')
+    
+    def form_valid(self,form):
+        #logica del proceso
+        return super(EmpleadoCreateView,self).form_valid(form)
     
     
+
     #context_object_name = 'lista'
 # Create your views here.
 # Listar lso empleados de la empresa
